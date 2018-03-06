@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Test Suit" verbose="1" >
+    <test name="Test Case Execution">
+
+        <classes>
+            <class name="Base">
+
+            </class>
+
+            <class name="Login">
+                <methods>
+                    <include name="login"/>
+
+                </methods>
+            </class>
+
+            <class name="Search">
+                <methods>
+                    <include name="search"/>
+                </methods>
+            </class>
+
+            <class name="Checkout">
+                <methods>
+                    <include name="Checkout"/>
+                </methods>
+            </class>
+
+        </classes>
+    </test>
+</suite>
