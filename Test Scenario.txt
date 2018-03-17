@@ -10,7 +10,7 @@ c. In this file contains Login, Search and check out class file with its method.
 d. These class file will be executed one by one. If we want run only one class file, we have comment the remaining class file.
 
 Step 3: Generating Reports
-a. At once test cases are executed, test result will be generated automatically using Extend report manager.
+a. At once test cases are executed, test result will be generated automatically using Extent report manager.
 b. Screen shots will be taken at the end of each test cases.
 c. If any error was occurred, screen shot will be taken and error log also captured in the report.
 
