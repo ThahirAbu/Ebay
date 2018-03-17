@@ -72,8 +72,6 @@ public class ObjectRepository extends Base {
 
 /*Using List Element parameters to perform Sorting the Products*/
     void Filter()  {
-//
-//        driver.findElement(leftmenu).click();
         driver.findElement(Sortbtn).click();
         int x;
         List<WebElement> sort = driver.findElements(filterelement);
