@@ -6,8 +6,9 @@ import java.util.HashMap;
 import static java.lang.Thread.sleep;
 
 /**
- * Created by Abuthahir AH on 05-03-2018.
+ * Extending the Object Repository class for accessing the variables.
  */
+
 public class Search extends ObjectRepository {
 
     private File location = new File("src");
@@ -16,22 +17,24 @@ public class Search extends ObjectRepository {
     @Test(priority = 1)
     public void search() throws InterruptedException {
         int i =1;
+        /*Declaring Excel sheet name and assigning the input values to input fields*/
+        /*This for loop will based on number of rows present in the Product Search sheet*/
+        /*Here searching the products, applying the Sorting*/
         driver.findElement(homesearchfield).click();
         for(HashMap h:ObjectRepository.data(FileLocation,"ProductSearch")) {
             searchProd(h.get("Search").toString());
             sleep(5000);
             swipingVerticalBtoT();
-            driver.pressKeyCode(AndroidKeyCode.BACK);
-            if(i==1)
+            sleep(5000);
+//            driver.pressKeyCode(AndroidKeyCode.BACK);
+            if (i==1)
             {
-                driver.findElement(By.id("com.ebay.mobile:id/primary_toolbar")).click();
+                driver.findElement(menusearch).click();
             }
-            else
-            {
-                Filter();
+            else {
                 Landing();
             }
-            i = i+1;
+            i=i+1;
         }
     }
 

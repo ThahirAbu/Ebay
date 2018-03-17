@@ -17,23 +17,24 @@ import java.util.List;
 import static java.lang.Thread.sleep;
 
 /**
- * Created by Abuthahir AH on 05-03-2018.
+ * This is an Object Repository Class, where we created the variables, action keys and common functions etc.
  */
 public class ObjectRepository extends Base {
 
+/*Creating alais variables*/
+    public By signin, username,password, homesearchfield, searchField,menusearchtxt,menusearch, prod1, filterelement,homemenu,
+            landing,buy,Qty,Preview,loginskip, Sortbtn,leftmenu;
 
-    public By signin, username,password, homesearchfield, searchField,menusearchField, prod1, filterelement,homemenu,
-            landing,buy,Qty,Preview,loginskip;
-
-/*Captured required and reusable elements in the app*/
+/*Assigning the resource elements to alais variables*/
     ObjectRepository() {
         signin = By.id("com.ebay.mobile:id/button_sign_in");
         username = By.className("android.widget.EditText");
         password = By.className("android.widget.EditText");
         homesearchfield = By.id("com.ebay.mobile:id/search_box");
-        menusearchField = By.id ("com.ebay.mobile:id/search_src_text");
+        menusearchtxt = By.id ("com.ebay.mobile:id/search_src_text");
         searchField = By.id("com.ebay.mobile:id/search_src_text");
         prod1 = By.id("com.ebay.mobile:id/cell_collection_item");
+        Sortbtn=By.id("com.ebay.mobile:id/button_sort");
         filterelement = By.id("com.ebay.mobile:id/button_filter_subelement");
         homemenu = By.id ("com.ebay.mobile:id/home");
         landing = By.id("com.ebay.mobile:id/design_menu_item_text");
@@ -41,45 +42,53 @@ public class ObjectRepository extends Base {
         Qty = By.id("android:id/numberpicker_input");
         Preview = By.id("com.ebay.mobile:id/take_action");
         loginskip = By.id("com.ebay.mobile:id/button_google_deny");
+        menusearch=By.id("com.ebay.mobile:id/menu_search");
+        leftmenu=By.id("com.ebay.mobile:id/primary_toolbar");
     }
 
+/*Creating Signin action */
     void click_signin() {
         driver.findElement(signin).click();
-        driver.findElement(loginskip).click();
     }
 
+/*Here using Xpath method to identify the Username field and get the input from external sourcee*/
     void setUsername(String uName) {
-        driver.findElement(username).sendKeys(uName);
+        driver.findElementByXPath("//*[@text = 'Email or username']").sendKeys(uName);
     }
 
+/*Here using Xpath method to identify the Password field and get the input from external source*/
     void setPassword(String pwd) {
-        driver.findElement(password).sendKeys(pwd);
+        driver.findElementByXPath("//*[@text = 'Password']").sendKeys(pwd);
     }
 
-    /*Searching the product*/
+/*Searching the products by getting the input from the external source*/
     void searchProd(String prod) throws InterruptedException {
         driver.findElement(searchField).sendKeys(prod);
         driver.pressKeyCode(AndroidKeyCode.ENTER);
         sleep(5000);
+        Filter();
         driver.findElement(prod1).click();
     }
 
-    /*Fetching the Sorting Option in the list element*/
-    void Filter()
-    {
-        driver.findElement(By.id("com.ebay.mobile:id/button_sort")).click();
+/*Using List Element parameters to perform Sorting the Products*/
+    void Filter()  {
+//
+//        driver.findElement(leftmenu).click();
+        driver.findElement(Sortbtn).click();
         int x;
         List<WebElement> sort = driver.findElements(filterelement);
         x = sort.size();
         sort.get(x-3).click();
     }
 
+/*Home screen navigation*/
     void Landing()
     {
         driver.findElement(homemenu).click();
         driver.findElement(landing).click();
     }
 
+/*Cart screen navigation and passing the values from the external source*/
     void cart(String quantity)
     {
         driver.findElement(buy).click();
@@ -88,6 +97,7 @@ public class ObjectRepository extends Base {
         driver.findElement(Preview).click();
     }
 
+/*This function take entire screen size and perform scrolling action from Bottom to Top middle of the screen*/
     void swipingVerticalBtoT() throws InterruptedException
     {
         sleep(2000);
@@ -104,9 +114,11 @@ public class ObjectRepository extends Base {
 
         static List<HashMap<String,String>> data(File filepath, String sheetName)
         {
+            /*Create an ArrayList to store the data read from excel sheet.*/
             List<HashMap<String,String>> mydata = new ArrayList<HashMap<String, String>>();
             try
             {
+                /*Create an excel workbook from the file system*/
                 FileInputStream fs = new FileInputStream(filepath);
                 XSSFWorkbook workbook = new XSSFWorkbook(fs);
                 XSSFSheet sheet = workbook.getSheet(sheetName);

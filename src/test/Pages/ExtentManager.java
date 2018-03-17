@@ -4,7 +4,8 @@ import com.aventstack.extentreports.reporter.configuration.ChartLocation;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
 /**
- * Created by Abuthahir AH on 06-03-2018.
+ * This is an Extent Report Manager Class for generating HTML report with UI theme.
+ * Report contains both positive and negative result and will be shown in PI chart format.
  */
 public class ExtentManager {
     public static ExtentReports extent;

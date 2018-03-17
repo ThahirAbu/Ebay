@@ -7,16 +7,17 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by Abuthahir AH on 05-03-2018.
+ * Extending the Object Repository class for accessing the variables.
  */
 public class Login extends ObjectRepository {
-
+    /*Declaring Excel sheet file location and name*/
     private File location = new File("src");
     private File FileLocation = new File(location,"Ebay_TestData.xlsx");
 
     @Test(priority = 1)
     public void login_Page(){
         click_signin();
+        /*Declaring Excel sheet name and assigning the input values to input fields*/
         for(HashMap h:ObjectRepository.data(FileLocation,"Login"))
         {
             System.out.println(h.keySet());
@@ -26,5 +27,6 @@ public class Login extends ObjectRepository {
             setPassword (h.get("PassCode").toString());
             click_signin();
         }
+        driver.findElement(loginskip).click();
     }
 }

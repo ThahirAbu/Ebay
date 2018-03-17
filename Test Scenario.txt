@@ -1,0 +1,21 @@
+Test Scenarios
+
+Step 1: Navigation flow
+a. Login into the application, searching the prodcuts and then navigating to Check out screen.
+
+Step 2: Execution of Test Cases
+a. Ebay project contains 3 test cases.
+b. We can control and run entire class file used in the Ebay project using TestNG.xml file.
+c. In this file contains Login, Search and check out class file with its method.
+d. These class file will be executed one by one. If we want run only one class file, we have comment the remaining class file.
+
+Step 3: Generating Reports
+a. At once test cases are executed, test result will be generated automatically using Extend report manager.
+b. Screen shots will be taken at the end of each test cases.
+c. If any error was occurred, screen shot will be taken and error log also captured in the report.
+
+Step 4: Viewing Reports
+a. Test report will be in the form of HTML format.
+b. We can open the report in the browser itself.
+
+

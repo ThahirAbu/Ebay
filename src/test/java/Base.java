@@ -22,8 +22,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class Base  {
 
-static AndroidDriver driver;
-private DesiredCapabilities caps = new DesiredCapabilities();
+    /*Declaring the Desired Capabilities*/
+    static AndroidDriver driver;
+    private DesiredCapabilities caps = new DesiredCapabilities();
     static ExtentReports extent;
     static ThreadLocal<ExtentTest> parentTest = new ThreadLocal<ExtentTest>();
     static ThreadLocal<ExtentTest> test = new ThreadLocal<ExtentTest>();
@@ -41,25 +42,25 @@ private DesiredCapabilities caps = new DesiredCapabilities();
         }
     }
 
+    /*Declaring APK file location and Appium driver setup*/
     private void serverConnection() throws MalformedURLException {
 
         File location = new File("src");
         File AppLocation = new File(location,"com.ebay.mobile_v5.17.0.18-117_Android-5.0.apk");
         caps.setCapability(MobileCapabilityType.APP, AppLocation.getAbsolutePath());
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), caps);
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
     }
+
+    /*At once all test cases was executed successfully, this method will create the HTML report automatically*/
     @BeforeSuite
     public void beforeSuite() throws IOException, InterruptedException {
-
         Thread.sleep(20000L);
-
         extent = ExtentManager.createInstance(System.getProperty("user.dir") + "\\Reports\\" + "Test.html");
         ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "\\Reports\\" + "Test.html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
         htmlReporter.config().setReportName("EBay Test Report");
-
     }
 
     @BeforeClass
@@ -78,6 +79,8 @@ private DesiredCapabilities caps = new DesiredCapabilities();
         ExtentTest child = parentTest.get().createNode(methodname);
         test.set(child);
     }
+
+    /*When Test case was filed, this method will capture the screen shots and save it under Screen shot folder*/
     @AfterMethod
     public synchronized void afterMethod(ITestResult result)throws IOException {
         if (result.getStatus() == ITestResult.FAILURE) {
@@ -93,6 +96,8 @@ private DesiredCapabilities caps = new DesiredCapabilities();
         else
             test.get().log(Status.PASS,MarkupHelper.createLabel(result.getName()+" Test case Passed",ExtentColor.GREEN));
     }
+
+    /*Closing the session object*/
     @AfterSuite
     public synchronized void after_suite() throws Exception {
         extent.flush();
